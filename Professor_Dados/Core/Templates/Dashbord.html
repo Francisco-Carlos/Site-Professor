@@ -1,0 +1,101 @@
+{% extends 'header.html' %}
+{% block content %}
+{%load static%}
+{% load pool_extras %}
+
+    <style>
+        h1{
+            font-family: cursive;
+            text-align: center;
+            text-decoration: underline;
+            margin-top: 20px;
+
+        }
+        h4{
+            font-family: fantasy;
+            text-align: center;
+            margin-top: 5px;
+        }
+        #cont{
+            width:300px;
+            border:2px solid black;
+            padding:5px;
+        }
+        #sub {
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-align: center;
+            font-size: 25px;
+            font-weight: lighter;
+        }
+    </style>
+    <div class="container">
+        <h1>Bem vindo {{user.username}} </h1>
+        <p id="sub" > Aqui voce podera subir todos os arquivos que deseja.</p>
+        <br>
+        <br>
+        <h2 style="display: inline;">Seus Projetos</h2>
+        <button style="margin-left: 700px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#CriarArq">Click aqui para postar <i class="fa fa-edit"></i></button>
+        <p style="border-bottom: 3px solid gray;">
+
+        <div class="row">
+            {% for arq in arqui %}
+            <div class="col-sm-4">
+
+                <div class="card" style="width:350px">
+                    {% if arq.Arquivo.url|extensao in ".jpg .png" %}
+                        <img class="card-img-top" style="width:300px; margin-left:20px" src="{{arq.Arquivo.url}}">
+                    {% elif arq.Arquivo.url|extensao in ".mp4 .avi" %}
+                        <video width="300" class="rounded" style="margin-left:10px;" controls>
+                            <source  src="{{arq.Arquivo.url}}">
+                        </video>
+                    {% else %}
+                        <img class="card-img-top" style="width:150px; margin-left:70px" src="{% static 'pdfs.jpg' %}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h4 class="sub">{{arq.Nome}}</h4>
+                        <a style="margin-left:50px;" href="{% url 'deletar' arq.id %}">
+                            <button class="btn btn-danger"> <i style='font-size:24px; width:180px;' class='fas'>&#xf714;</i></button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!--Aqui começa o modal-->
+    <div class="modal" id="CriarArq">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!--o Cabeçalho-->
+                <div class="modal-header">
+                    <h4 class="modal-title">Subir arquivo</h4>
+                    <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                </div>
+                <!-- Corpo-->
+                <div class="modal-body">
+                    <form action="{% url 'Criar_arquivo' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label>Titulo</label>
+                            <input class="form-control" type="text" name="titulo">
+                        </div>
+                        <div class="form-group">
+                            <label>Descriçao</label>
+                            <input class="form-control" type="text" name="descricao">
+                        </div>
+                        <div class="form-group">
+                            <label>arquivo</label>
+                            <input class="form-control" type="file" name="arquivo">
+                        </div>
+                        <button class="btn btn-success" type="submit">enviar</button>
+                    </form>
+                </div>
+                <!--O rodape-->
+                <div class="modal-footer">
+                    <button class="btn btn-danger" data-dismiss="modal">close</button>
+                </div>    
+            </div>
+        </div>
+    </div>
+{% endblock%}

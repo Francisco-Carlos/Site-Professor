@@ -1,0 +1,47 @@
+{% extends 'header.html'%}
+{% block content %}
+{%load static%}
+    <style>
+        h1,h2{
+            text-align: center;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            margin-top: 15px;
+            padding: 5px;
+            text-decoration:underline;
+            font-size:60px;
+        }
+        p{
+            text-align: center;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            margin-top: 15px;
+            padding: 5px;
+            font-size:20px;
+        }
+
+    </style>
+    <div class="container">
+        <h1>Biblioteca</h1>
+        <p>Aqui esta todos os conteudos para voce baixar.</p>
+      
+        <table class="table table-houver"> 
+            <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Descriaçao</th>
+                    <th>Criador</th>
+                    <th>Baixar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for arq in arquivos%}
+                    <tr>
+                        <td>{{arq.Nome}}</td>
+                        <td>{{arq.Conteudo}}</td>
+                        <td>{{arq.Criador}}</td>
+                        <td><a href="{{arq.Arquivo.url}}" target="_blank"> <i style='font-size:24px; color:blue;' class='fas'>&#xf019;</i></a></td>
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>    
+{% endblock%}

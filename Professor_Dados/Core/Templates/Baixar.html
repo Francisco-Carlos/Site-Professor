@@ -1,0 +1,83 @@
+{% extends "header.html" %}
+{% load static %}
+{% block content %}
+<style>
+    h1,h2{
+        text-align: center;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        margin-top: 15px;
+        padding: 5px;
+        text-decoration:underline;
+        font-size:60px;
+    }
+    p{
+        text-align: center;
+        font-family:Georgia, 'Times New Roman', Times, serif;
+        margin-top: 15px;
+        padding: 5px;
+        font-size:30px;
+    }
+    #pesq{
+        margin-top: 100px;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: 15px;
+        padding: 20px;
+    }
+    input,label{
+        margin-left: 10px;
+    }
+  
+</style>
+<div class="container">
+    <h1> Baixar seus vidoes do youtube e facil.</h1>
+    <p> Tudo que voce precisa e do link do video.</p>
+    
+    <div class="row" style="margin-top: 60px;">
+        <div class="col-sm-4">
+            <div>
+                <img class="card-img-top"  src="{% static 'link.jpg' %}">
+                <div class="card-body">
+                    <h4>escolhar o link do seu video.</h4>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-sm-4">
+
+            <div>
+                <img class="card-img-top"  src="{% static 'pasta.jpeg' %}">
+                <div class="card-body">
+                    <h4>escolha onde deseja salvar passe o caminho</h4>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+
+            <div>
+                <img class="card-img-top"  src="{% static 'video.jpg' %}">
+                <div class="card-body">
+                    <h4>e o video vai ser salvo</h4>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <form id="pesq" class="form-inline" action="{% url 'Baixar' %}" method="POST"  >
+        {% csrf_token %}
+        <label>Coloque o Link abaixo</label>
+        <input class="form-control" type="url" name="link" placeholder="aqui vai o link">
+        <label>Coloque o caminho para salvar abaixo</label>
+        <input type="text" name='caminho' class="form-control">
+        <button type="submit" class="btn btn-success">baixar</button>
+    </form>    
+    <p>Todos o videos sao em resoluçao 360 sempre que baixar verifique onde vc colocou o caminho</p>
+    {% for men in mensagen %}
+        <h2> {{men.mensagen}} </h2>
+    {% endfor%}
+</div>
+{% endblock %}

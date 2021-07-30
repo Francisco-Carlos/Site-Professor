@@ -1,0 +1,72 @@
+{% extends 'header.html'%}
+{% block content %}
+{%load static%}
+    <style>
+        h1,h2{
+            text-align: center;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            margin-top: 15px;
+            padding: 5px;
+            text-decoration:underline;
+            font-size:70px;
+        }
+        p{
+            text-align: center;
+            font-family:Georgia, 'Times New Roman', Times, serif;
+            margin-top: 15px;
+            padding: 5px;
+            font-size:30px;
+        }
+      
+    </style>
+    <div class="container">
+        <h1>Biblioteca</h1>
+        <p>Aqui voce vai encontrar varios arquivos sobre assuntos diferente. </p>
+        <img src="{% static 'biblic_1.jpg' %}" style="width:100%;">
+        <h2>Arquivos</h2>
+        <p>Cada conteudo e disponcel pelos seus prorios criadores tanto os formados na area <br>
+            quanto os que conseguiram conhecimento por suas propria experiencia.</p>
+
+        <h2>Veja a seguir</h2>
+        <p>Alguns conteudos que voce vai encotrar aqui.</p>
+
+        <div class="row">
+            <div class="col-sm-4">
+
+                <div>
+                    <img class="card-img-top" style="width:200px; margin-left:60px;" src="{% static 'pdfs.jpg' %}">
+                    <div class="card-body">
+                        <h4>vai econtrar varios pdfs para voce baixar</h4>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-sm-4">
+
+                <div>
+                    <img class="card-img-top" style="width:400px; margin-left:-50px;" src="{% static 'yutbe.jpg' %}">
+                    <div class="card-body">
+                        <h4>vai econtrar varios videos  para voce baixar</h4>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+
+                <div>
+                    <img class="card-img-top" style="width:200px; margin-left:60px;" src="{% static 'imgs.png' %}">
+                    <div class="card-body">
+                        <h4>vai econtrar varias imagens  para voce baixar</h4>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Baixar tudo que deseja.</h2>
+        <p>alem dos conteudos que os usuarios disponem voce pode baixar do proprio youtube.</p>
+        <img src="{% static 'youtube.jpg' %}">
+    </div>
+{% endblock%}
